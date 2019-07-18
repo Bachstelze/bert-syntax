@@ -1,6 +1,6 @@
 # BERT-Syntax
 
-Assesing the syntactic abilities of BERT.
+Assessing the syntactic abilities of BERT. This fork of Yoav Goldberg repository is the code for the technical report [Some additional experiments extending the tech report ”Assessing BERT’s Syntactic Abilities” by Yoav Goldberg](https://huggingface.co/bert-syntax/extending-bert-syntax.pdf)
 
 ## What
 
