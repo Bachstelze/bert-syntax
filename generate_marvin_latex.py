@@ -3,7 +3,7 @@ from collections import *
 
 script, result_path, model_name = argv
 
-files = [(model_name,  result_path + "/marvin_results.txt"))
+files = [(model_name,  result_path + "/marvin_results.txt")]
 
 table_layout = """
 \\begin{{table}}[H]
