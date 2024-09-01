@@ -52,3 +52,5 @@ for cond in conditions:
     results += line_layout.format(condition=cond, value=so, test_count= sum(ro.values()))
 
 print(table_layout.format(lines=results, model_name=model_name, mean=result_sum/sum_counter))
+sys.stdout.flush()
+
