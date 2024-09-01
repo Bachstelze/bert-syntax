@@ -8,7 +8,7 @@ files = [(model_name,  result_path + "/marvin_results.txt")]
 table_layout = """
 \\begin{{table}}[H]
     \\begin{{tabular}}{{|l|c|}}
-        \\hline Condition & Value\\
+        \\hline Condition & Value & Test cases\\
 {lines}
         \\hline \\end{{tabular}}
         \\caption{{Evaluation of {model_name} with an average of {mean}}}
@@ -16,7 +16,7 @@ table_layout = """
 \\end{{table}}
 """
 
-line_layout = "        \\hline {condition} & {value}\\"
+line_layout = "        \\hline {condition} & {value} & {test_count}\\ \n"
 
 by_model={}
 conditions=set()
@@ -49,7 +49,8 @@ for cond in conditions:
         sum_counter += 1
         so = "%.2f" % (ro['True']/(ro['True']+ro['False']))
     result_sum += float(so)
-    results += " & ".join(map(str,[cond, so, sum(rb.values()), sum(ro.values())])) + "\\\\ \n"
+    results += line_layout.format(condition=cond, value=so, test_count= sum(ro.values()))
+    #results += " & ".join(map(str,[cond, so, sum(ro.values())])) + "\\\\ \n"
 
 print(result_sum)
 print(result_sum/sum_counter)
