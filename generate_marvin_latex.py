@@ -40,7 +40,7 @@ print("skipped:",skipped)
 
 results = ""
 result_sum = 0.0
-suzm_counter = 0
+sum_counter = 0
 for cond in conditions:
     ro = by_model[model_name][cond]
     if sum(ro.values())==0:
