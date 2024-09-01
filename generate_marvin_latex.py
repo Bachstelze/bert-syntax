@@ -48,7 +48,7 @@ for cond in conditions:
     else:
         sum_counter += 1
         so = "%.2f" % (ro['True']/(ro['True']+ro['False']))
-    result_sum += so
+    result_sum += float(so)
     results += " & ".join(map(str,[cond, so, sum(rb.values()), sum(ro.values())])) + "\\\\ \n"
 
 print(result_sum)
