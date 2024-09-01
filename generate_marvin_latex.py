@@ -12,7 +12,7 @@ table_layout = """
 {lines}
         \\hline \\end{{tabular}}
         \\caption{{Evaluation of {model_name} with an average of {mean}}}
-    \\label{{model_name}}
+    \\label{model_name}
 \\end{{table}}
 """
 
