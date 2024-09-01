@@ -168,7 +168,7 @@ def get_probs_for_words_batch(sentences, w1_list, w2_list):
 def load_marvin():
     cc = Counter()
     out = []
-    for line in open("marvin_linzen_dataset.tsv"):
+    for line in open("../../bert-syntax/marvin_linzen_dataset.tsv"):
         case = line.strip().split("\t")
         cc[case[1]] += 1
         g, ug = case[-2], case[-1]
@@ -208,7 +208,7 @@ def eval_marvin():
             sys.stdout.flush()
 
 def eval_lgd():
-    lines = [line.strip().split("\t") for line in open("lgd_dataset.tsv", encoding="utf8")]
+    lines = [line.strip().split("\t") for line in open("../../bert-syntax/lgd_dataset.tsv", encoding="utf8")]
     na_list, masked_list, good_list, bad_list = zip(*[(line[0], line[2], line[3], line[4]) for line in lines])
 
     for i in range(0, len(masked_list), batch_size):
@@ -228,7 +228,7 @@ def eval_lgd():
             sys.stdout.flush()
 
 def read_gulordava():
-    rows = csv.DictReader(open("generated.tab", encoding="utf8"), delimiter="\t")
+    rows = csv.DictReader(open("../../bert-syntax/generated.tab", encoding="utf8"), delimiter="\t")
     data = []
     for row in rows:
         row2 = next(rows)
