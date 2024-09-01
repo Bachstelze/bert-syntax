@@ -1,0 +1,56 @@
+import sys
+from collections import *
+
+script, result_path, model_name = argv
+
+files = [(model_name,  result_path + "/marvin_results.txt"))
+
+table_layout = """
+\\begin{{table}}[H]
+    \\begin{{tabular}}{{|l|c|}}
+        \\hline Condition & Value\\
+{lines}
+        \\hline \\end{{tabular}}
+        \\caption{{Evaluation of {model_name} with an average of {mean}}}
+    \\label{{model_name}}
+\\end{{table}}
+"""
+
+line_layout = "        \\hline {condition} & {value}\\"
+
+by_model={}
+conditions=set()
+for title,fname in files:
+    lines = open(fname)
+    results=defaultdict(Counter)
+    by_model[title]=results
+    skipped = set()
+    for line in lines:
+        if line.startswith("Better speed"): continue
+        if line.startswith("skipping"):
+            skipped.add(line.split()[1])
+            next(lines)
+            continue
+        res,c1,c2,w1,w2,s = line.split(None, 5)
+        c1 = c1.replace("inanim","anim")
+        conditions.add(c1)
+        results[c1][res]+=1
+
+print("skipped:",skipped)
+
+results = ""
+result_sum = 0.0
+suzm_counter = 0
+for cond in conditions:
+    ro = by_model[model_name][cond]
+    if sum(ro.values())==0:
+        so = "-"
+    else:
+        sum_counter += 1
+        so = "%.2f" % (ro['True']/(ro['True']+ro['False']))
+    result_sum += so
+    results += " & ".join(map(str,[cond, so, sum(rb.values()), sum(ro.values())])) + "\\\\ \n"
+
+print(result_sum)
+print(result_sum/sum_counter)
+print(table_layout.format(lines=results, model_name=model_name, mean=sum_counter))
