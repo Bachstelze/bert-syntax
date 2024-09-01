@@ -1,7 +1,7 @@
 import sys
 from collections import *
 
-script, result_path, model_name = argv
+script, result_path, model_name = sys.argv
 
 files = [(model_name,  result_path + "/marvin_results.txt")]
 
