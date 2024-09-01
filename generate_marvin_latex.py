@@ -51,6 +51,6 @@ for cond in conditions:
     result_sum += float(so)
     results += line_layout.format(condition=cond, value=so, test_count= sum(ro.values()))
 
-print(table_layout.format(lines=results, model_name=model_name, mean=result_sum/sum_counter))
+print(table_layout.format(lines=results, model_name=model_name, mean=round(result_sum/sum_counter,3)))
 sys.stdout.flush()
 
