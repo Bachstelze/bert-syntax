@@ -8,11 +8,11 @@ files = [(model_name,  result_path)]
 table_layout = """
 \\begin{{table}}[H]
     \\begin{{tabular}}{{|l|c|c|}}
-        \\hline Condition & Value & Test cases\\
+        \\hline Condition & Value & Test cases\\\\
 {lines}
         \\hline \\end{{tabular}}
         \\caption{{Evaluation of {model_name} with an average of {mean}}}
-    \\label{model_name}
+    \\label{{label_{model_name}}}
 \\end{{table}}
 """
 
