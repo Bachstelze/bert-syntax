@@ -51,7 +51,8 @@ def get_probs_for_words_batch(sentences, w1_list, w2_list):
 
     for sent, w1, w2 in zip(sentences, w1_list, w2_list):
         pre, target, post = sent.split("***")
-        target = ["[MASK]"] if "mask" in target.lower() else tokenizer.tokenize(target)
+        # we set directly the target token
+        # target = ["[MASK]"] if "mask" in target.lower() else tokenizer.tokenize(target)
 
         tokens = tokenizer.tokenize(pre)
         target_idx = len(tokens)
