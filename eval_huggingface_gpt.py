@@ -47,11 +47,12 @@ def get_probs_for_words(sent, w1, w2):
     target_idx = len(tokens)
 
     # Filter answers based on BERT wordpieces to align with BERT results
-    try:
-        word_ids=bert_tokenizer.convert_tokens_to_ids([w1,w2])
-    except KeyError:
-        print("skipping",w1,w2,"bad wins")
-        return None
+    if bool(filter_tokens):
+        try:
+            word_ids=bert_tokenizer.convert_tokens_to_ids([w1,w2])
+        except KeyError:
+            print("skipping",w1,w2,"bad wins")
+            return None
 
     tok_w1, tok_w2 = tokenizer.tokenize(w1), tokenizer.tokenize(w2)
     input_ids = tokenizer.convert_tokens_to_ids(tokens)
