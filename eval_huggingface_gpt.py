@@ -1,12 +1,11 @@
 # coding=utf-8
-from pytorch_pretrained_bert import OpenAIGPTLMHeadModel, OpenAIGPTTokenizer, BertTokenizer
 import torch
 import sys
 import csv
 import logging
 import itertools
 
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, BertTokenizer
 import numpy as np
 
 script, dataset_type, model_name, filter_tokens, split_words, use_postfix = sys.argv
