@@ -10,7 +10,11 @@ import numpy as np
 
 script, dataset_type, model_name, filter_tokens, split_words, use_postfix = sys.argv
 
+print("using split words: {}".format(split_words), file=sys.stderr)
+print("using postfix: {}".format(use_postfix), file=sys.stderr)
+print("using filtered tokens: {}".format(filter_tokens), file=sys.stderr)
 print("using model: {}".format(model_name), file=sys.stderr)
+
 model = AutoModelForCausalLM.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
@@ -18,19 +22,6 @@ logging.basicConfig(level=logging.INFO)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-
-split_words = True
-if 'no_split' in sys.argv:
-    split_words = False
-    print("We don't split words", file=sys.stderr)
-
-use_postfix = True
-if 'use_postfix' in sys.argv:
-    use_postfix = True
-    print("We compute probabilities over the entire sentence", file=sys.stderr)
-
-#model = OpenAIGPTLMHeadModel.from_pretrained(model_name)
-#tokenizer = OpenAIGPTTokenizer.from_pretrained(model_name)
 bert_tokenizer=BertTokenizer.from_pretrained('bert-base-uncased')
 model.eval()
 model.to(device)
