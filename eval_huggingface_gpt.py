@@ -52,11 +52,11 @@ def get_probs_for_words(sent, w1, w2):
         print("skipping",pre,w1,w2,"empty beggingin")
         return None
 
-    if not split_words and (len(tok_w1) > 1 or len(tok_w2) > 1):
+    if not bool(split_words) and (len(tok_w1) > 1 or len(tok_w2) > 1):
         print("skipping",pre,w1,w2,"splitted words")
         return None
 
-    if use_postfix:
+    if bool(use_postfix):
         # Add post focus tokens
         end_tokens = tokenizer.tokenize(post)
         end_ids = tokenizer.convert_tokens_to_ids(end_tokens)
