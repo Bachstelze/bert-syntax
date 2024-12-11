@@ -5,7 +5,7 @@ import csv
 import logging
 import itertools
 
-from transformers import AutoTokenizer, AutoModelForCausalLM, BertTokenizer
+from transformers import AutoTokenizer, AutoModelForCausalLM
 import numpy as np
 
 script, dataset_type, model_name, filter_tokens, split_words, use_postfix = sys.argv
@@ -20,8 +20,10 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 logging.basicConfig(level=logging.INFO)
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "CPU")
 
+# use old framework for the token filtering
+from pytorch_pretrained_bert import BertTokenizer
 bert_tokenizer=BertTokenizer.from_pretrained('bert-base-uncased')
 model.eval()
 model.to(device)
