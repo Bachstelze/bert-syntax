@@ -118,7 +118,7 @@ def load_marvin():
     cc = Counter()
     # note: I edited the LM_Syneval/src/make_templates.py script, and run "python LM_Syneval/src/make_templates.py LM_Syneval/data/templates/ > marvin_linzen_dataset.tsv"
     out = []
-    for line in open("marvin_linzen_dataset.tsv"):
+    for line in open("../../bert-syntax/marvin_linzen_dataset.tsv"):
         case = line.strip().split("\t")
         cc[case[1]] += 1
         g, ug = case[-2], case[-1]
@@ -162,7 +162,7 @@ def eval_marvin():
 
 
 def eval_lgd():
-    for i, line in enumerate(open("lgd_dataset.tsv", encoding="utf8")):
+    for i, line in enumerate(open("../../bert-syntax/lgd_dataset.tsv", encoding="utf8")):
         #    for i,line in enumerate(open("lgd_dataset_with_is_are.tsv",encoding="utf8")):
         na, _, masked, good, bad = line.strip().split("\t")
         ps = get_probs_for_words(masked, good, bad)
@@ -177,7 +177,7 @@ def eval_lgd():
 
 
 def read_gulordava():
-    rows = csv.DictReader(open("generated.tab", encoding="utf8"), delimiter="\t")
+    rows = csv.DictReader(open("../../bert-syntax/generated.tab", encoding="utf8"), delimiter="\t")
     data = []
     for row in rows:
         row2 = next(rows)
