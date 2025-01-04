@@ -31,9 +31,9 @@ for title,fname in files:
             try:
                 skipped.add(line.split()[1])
                 next(lines)
-                continue
             except StopIteration:
                 print("StopIteration in the last line")
+            continue
             
         res,c1,c2,w1,w2,s = line.split(None, 5)
         c1 = c1.replace("inanim","anim")
