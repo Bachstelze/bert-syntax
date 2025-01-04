@@ -28,9 +28,13 @@ for title,fname in files:
     for line in lines:
         if line.startswith("Better speed"): continue
         if line.startswith("skipping"):
-            skipped.add(line.split()[1])
-            next(lines)
-            continue
+            try:
+                skipped.add(line.split()[1])
+                next(lines)
+                continue
+            except StopIteration:
+                print("StopIteration in the last line")
+            
         res,c1,c2,w1,w2,s = line.split(None, 5)
         c1 = c1.replace("inanim","anim")
         conditions.add(c1)
