@@ -1,7 +1,10 @@
 import sys
 from collections import *
+import pickle
 
-script, result_path, model_name = sys.argv
+script, result_path, model_name, result_dir, task_result = sys.argv
+
+result_dic = {}
 
 files = [(model_name,  result_path)]
 
@@ -42,7 +45,7 @@ for title,fname in files:
 
 print("skipped:",skipped)
 
-results = ""
+latex_results = ""
 result_sum = 0.0
 sum_counter = 0
 for cond in conditions:
@@ -53,8 +56,18 @@ for cond in conditions:
         sum_counter += 1
         so = "%.2f" % (ro['True']/(ro['True']+ro['False']))
     result_sum += float(so)
-    results += line_layout.format(condition=cond, value=so, test_count= sum(ro.values()))
+    latex_results += line_layout.format(condition=cond, value=so, test_count= sum(ro.values()))
+    result_dic[cond] = so
 
-print(table_layout.format(lines=results, model_name=model_name, mean=round(result_sum/sum_counter,3)))
+print(table_layout.format(lines=latex_results, model_name=model_name, mean=round(result_sum/sum_counter,3)))
 sys.stdout.flush()
+
+#save result_dic into a pickle
+pickle_path = result_dir + "/" + task_result + ".pickle"
+with open(pickle_path, 'wb') as handle:
+    pickle.dump(result_dic, handle, protocol=pickle.HIGHEST_PROTOCOL)
+# reopening 
+with open(pickle_path, 'rb') as handle:
+    test_overall_dictionary = pickle.load(handle)
+    print(test_overall_dictionary, flush=True)
 
