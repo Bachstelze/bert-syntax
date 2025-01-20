@@ -66,8 +66,10 @@ sys.stdout.flush()
 pickle_path = result_dir + "/" + task_result + ".pickle"
 with open(pickle_path, 'wb') as handle:
     pickle.dump(result_dic, handle, protocol=pickle.HIGHEST_PROTOCOL)
-# reopening 
+# reopening
+"""
 with open(pickle_path, 'rb') as handle:
     test_overall_dictionary = pickle.load(handle)
     print(test_overall_dictionary, flush=True)
+"""
 
