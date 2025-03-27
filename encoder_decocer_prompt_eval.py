@@ -97,7 +97,6 @@ def get_probs_for_words_batch(sentences, w1_list, w2_list):
         encoder_prompt = "Fill-in the masked token into the following sentence:\n"
         encoder_prompt = "Fill in the masked sequences in the following paragraph:\n"
         encoder_input = encoder_prompt + str(pre) + mask_token + str(post)
-        encoder_input = str(pre) + mask_token + str(post)
         encoder_tokens = tokenizer.tokenize(encoder_input)
         encoder_input_ids = tokenizer.convert_tokens_to_ids(encoder_tokens)
         encoder_input_ids_batch.append(encoder_input_ids)
