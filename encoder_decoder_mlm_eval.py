@@ -7,6 +7,8 @@ import itertools
 import numpy as np
 from collections import Counter, defaultdict
 import time
+from transformers.utils import logging
+logging.set_verbosity_error()
 
 script, dataset_type, model_name, batch_size, filter_tokens, split_words, use_postfix = sys.argv
 # convert the batch size string
