@@ -64,7 +64,7 @@ def get_full_token_score(input, target_token, processed_token, overall_token_sco
     predicted_token = pipe_output[0]["token_str"]
     processed_token += predicted_token
     new_target_token = target_token[len(predicted_token):]
-    combined_input = input.replace("<mask>", predicted_token+"<mask>")
+    combined_input = input.replace(mask_token, predicted_token+mask_token)
     if processed_token == target_token:
         #print("final score")
         finall_score = overall_token_score/sub_token_count
@@ -82,8 +82,8 @@ def get_probs_for_words_mlm(sentence, w1, w2):
   pipeline_input = pre + mask_token + post
   print(pipeline_input)
 
-  score_w1 = get_full_token_score(pipeline_input, w1, "", 0.0, 0)
-  score_w2 = get_full_token_score(pipeline_input, w2, "", 0.0, 0)
+  score_w1 = get_full_token_score(pipeline_input, w1[0], "", 0.0, 0)
+  score_w2 = get_full_token_score(pipeline_input, w2[0], "", 0.0, 0)
   
   return score_w1, score_w2
 
