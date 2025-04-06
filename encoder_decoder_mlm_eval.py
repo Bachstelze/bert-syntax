@@ -88,8 +88,8 @@ def get_probs_for_words_mlm_batch(sentence, w1, w2):
           print("skipping", w1, w2, "bad tokens")
           print("skipping", w1, w2, "bad tokens", file=sys.stderr)
           continue
-  score_w1 = def get_full_token_score(pipeline_input, w1, "", 0.0, 0)
-  score_w2 = def get_full_token_score(pipeline_input, w2, "", 0.0, 0)
+  score_w1 = get_full_token_score(pipeline_input, w1, "", 0.0, 0)
+  score_w2 = get_full_token_score(pipeline_input, w2, "", 0.0, 0)
   
   return score_w1, score_w2
 
