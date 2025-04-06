@@ -322,7 +322,8 @@ def eval_gulordava():
         if ps is None:
             continue
         gp_batch, bp_batch = ps
-        print(gp_batch > bp_batch, cases[i], types[i], batch_goods[0], batch_bads[0], batch_sentences[0])
+        print(str(gp_batch > bp_batch), natt_list[i], batch_goods[0], gp_batch, batch_bads[0], bp_batch, batch_sentences[0].encode("utf8"), sep=u"\t")
+        #print(gp_batch > bp_batch, natt_list[i], types[i], batch_goods[0], batch_bads[0], batch_sentences[0])
 
         if i % 100 == 0:
             print(i, file=sys.stderr)
