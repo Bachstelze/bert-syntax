@@ -59,7 +59,7 @@ mask_token = tokenizer.mask_token
 def get_full_token_score(input, target_token, processed_token, overall_token_score, sub_token_count):
     processed_token = ""
     pipe_output = bert_unmask(input, targets=[target_token])
-    print(pipe_output)
+    #print(pipe_output)
     predicted_token_score = pipe_output[0]["score"]
     overall_token_score += predicted_token_score
     sub_token_count += 1
@@ -76,6 +76,7 @@ def get_full_token_score(input, target_token, processed_token, overall_token_sco
 
     #print(combined_input)
     #print("combine subtoken, recusrive call")
+    print(input, target_token, processed_token, overall_token_score, sub_token_count)
     return get_full_token_score(input, target_token, processed_token, overall_token_score, sub_token_count)
   
 def get_probs_for_words_mlm(sentence, w1, w2):
