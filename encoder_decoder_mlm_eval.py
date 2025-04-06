@@ -47,8 +47,8 @@ bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 logging.basicConfig(level=logging.INFO)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.eval()
-model.to(device)
+masked_lm_model.eval()
+masked_lm_model.to(device)
 
 # Use the padding token
 padding_token_id = tokenizer.pad_token_id
