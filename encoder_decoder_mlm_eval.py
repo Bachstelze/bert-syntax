@@ -80,14 +80,7 @@ def get_probs_for_words_mlm(sentence, w1, w2):
   pre, target, post = sentence.split("***")
   
   pipeline_input = pre + mask_token + post
-  # Filter answers based on BERT wordpieces to align with BERT results
-  if bool(filter_tokens):
-      try:
-          word_ids = bert_tokenizer.convert_tokens_to_ids([w1, w2])
-      except KeyError:
-          print("skipping", w1, w2, "bad tokens")
-          print("skipping", w1, w2, "bad tokens", file=sys.stderr)
-          continue
+
   score_w1 = get_full_token_score(pipeline_input, w1, "", 0.0, 0)
   score_w2 = get_full_token_score(pipeline_input, w2, "", 0.0, 0)
   
