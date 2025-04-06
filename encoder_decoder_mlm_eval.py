@@ -46,7 +46,7 @@ bert_unmask = pipeline('fill-mask', model=masked_lm_model, tokenizer=tokenizer)
 bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 
-logging.basicConfig(level=logging.INFO)
+#logging.basicConfig(level=logging.INFO)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 masked_lm_model.eval()
