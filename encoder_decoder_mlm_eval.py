@@ -76,7 +76,7 @@ def get_full_token_score(input, target_token, processed_token, overall_token_sco
     #print("combine subtoken, recusrive call")
     return get_full_token_score(input, target_token, processed_token, overall_token_score, sub_token_count)
   
-def get_probs_for_words_mlm_batch(sentence, w1, w2):
+def get_probs_for_words_mlm(sentence, w1, w2):
   pre, target, post = sentence.split("***")
   
   pipeline_input = pre + mask_token + post
@@ -248,8 +248,15 @@ def eval_marvin():
         batch_sentences = sentences[i:i+batch_size]
         batch_goods = goods[i:i+batch_size]
         batch_bads = bads[i:i+batch_size]
+        if bool(filter_tokens):
+          try:
+              word_ids = bert_tokenizer.convert_tokens_to_ids([batch_goods, batch_bads])
+          except KeyError:
+              print("skipping", w1, w2, "bad tokens")
+              print("skipping", w1, w2, "bad tokens", file=sys.stderr)
+              continue
 
-        ps = get_probs_for_words_batch(batch_sentences, batch_goods, batch_bads)
+        ps = get_probs_for_words_mlm(batch_sentences, batch_goods, batch_bads)
         if ps is None:
             continue
         gp_batch, bp_batch = ps
