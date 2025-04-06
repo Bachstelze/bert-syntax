@@ -54,7 +54,7 @@ model.to(device)
 padding_token_id = tokenizer.pad_token_id
 mask_token = tokenizer.mask_token
 
-def def get_full_token_score(input, target_token, processed_token, overall_token_score, sub_token_count):
+def get_full_token_score(input, target_token, processed_token, overall_token_score, sub_token_count):
     processed_token = ""
     pipe_output = bert_unmask(input, targets=[target_token])
     print(pipe_output)
