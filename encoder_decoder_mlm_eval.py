@@ -76,7 +76,7 @@ def get_full_token_score(input, target_token, processed_token, overall_token_sco
 
     #print(combined_input)
     #print("combine subtoken, recusrive call")
-    print(combined_input, new_target_token, processed_token, overall_token_score, sub_token_count)
+    #print(combined_input, new_target_token, processed_token, overall_token_score, sub_token_count)
     return get_full_token_score(combined_input, new_target_token, processed_token, overall_token_score, sub_token_count)
   
 def get_probs_for_words_mlm(sentence, w1, w2):
@@ -257,7 +257,7 @@ def eval_marvin():
         if ps is None:
             continue
         gp_batch, bp_batch = ps
-        print(gp_batch > bp_batch, cases[i], types[i], batch_goods, batch_bads, batch_sentences)
+        print(gp_batch > bp_batch, cases[i], types[i], batch_goods[0], batch_bads[0], batch_sentences[0])
         """
         for j in range(len(gp_batch)):
             print(gp_batch[j] > bp_batch[j], cases[i+j], types[i+j], batch_goods[j], batch_bads[j], batch_sentences[j])
@@ -306,17 +306,23 @@ def eval_gulordava():
     data = read_gulordava()
     masked_list, natt_list, good_list, bad_list = zip(*data)
 
-    for i in range(0, len(masked_list), batch_size):
-        batch_masked = masked_list[i:i+batch_size]
-        batch_goods = good_list[i:i+batch_size]
-        batch_bads = bad_list[i:i+batch_size]
+    for i in range(0, len(sentences), batch_size):
+        batch_sentences = sentences[i:i+batch_size]
+        batch_goods = goods[i:i+batch_size]
+        batch_bads = bads[i:i+batch_size]
+        if bool(filter_tokens):
+          try:
+              word_ids = bert_tokenizer.convert_tokens_to_ids([batch_goods, batch_bads])
+          except KeyError:
+              print("skipping", w1, w2, "bad tokens")
+              print("skipping", w1, w2, "bad tokens", file=sys.stderr)
+              continue
 
-        ps = get_probs_for_words_batch(batch_masked, batch_goods, batch_bads)
+        ps = get_probs_for_words_mlm(batch_sentences, batch_goods, batch_bads)
         if ps is None:
             continue
         gp_batch, bp_batch = ps
-        for j in range(len(gp_batch)):
-            print(str(gp_batch[j] > bp_batch[j]), natt_list[i+j], batch_goods[j], gp_batch[j], batch_bads[j], bp_batch[j], batch_masked[j].encode("utf8"), sep=u"\t")
+        print(gp_batch > bp_batch, cases[i], types[i], batch_goods[0], batch_bads[0], batch_sentences[0])
 
         if i % 100 == 0:
             print(i, file=sys.stderr)
