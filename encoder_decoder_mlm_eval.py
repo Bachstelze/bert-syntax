@@ -254,8 +254,11 @@ def eval_marvin():
         if ps is None:
             continue
         gp_batch, bp_batch = ps
+        print(gp_batch > bp_batch, cases[i], types[i], batch_goods, batch_bads, batch_sentences)
+        """
         for j in range(len(gp_batch)):
             print(gp_batch[j] > bp_batch[j], cases[i+j], types[i+j], batch_goods[j], batch_bads[j], batch_sentences[j])
+        """
 
         if i % 100 == 0:
             print(i, time.time() - start, file=sys.stderr)
