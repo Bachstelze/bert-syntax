@@ -76,8 +76,8 @@ def get_full_token_score(input, target_token, processed_token, overall_token_sco
 
     #print(combined_input)
     #print("combine subtoken, recusrive call")
-    print(input, target_token, processed_token, overall_token_score, sub_token_count)
-    return get_full_token_score(input, target_token, processed_token, overall_token_score, sub_token_count)
+    print(combined_input, new_target_token, processed_token, overall_token_score, sub_token_count)
+    return get_full_token_score(combined_input, new_target_token, processed_token, overall_token_score, sub_token_count)
   
 def get_probs_for_words_mlm(sentence, w1, w2):
   print(sentence)
