@@ -1,4 +1,4 @@
-from transformers import AutoConfig, AutoModelForMaskedLM, AutoTokenizer, AutoModelForCausalLM, BertTokenizer, AutoModelForSeq2SeqLM
+from transformers import AutoConfig, AutoModelForMaskedLM, AutoTokenizer, AutoModelForCausalLM, BertTokenizer, AutoModelForSeq2SeqLM, pipeline
 import torch
 import sys
 import csv
