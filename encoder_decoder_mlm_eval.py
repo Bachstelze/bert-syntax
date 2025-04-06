@@ -307,7 +307,7 @@ def eval_gulordava():
     masked_list, natt_list, good_list, bad_list = zip(*data)
 
     for i in range(0, len(masked_list), batch_size):
-        batch_sentences = sentences[i:i+batch_size]
+        batch_sentences = masked_list[i:i+batch_size]
         batch_goods = good_list[i:i+batch_size]
         batch_bads = bad_list[i:i+batch_size]
         if bool(filter_tokens):
