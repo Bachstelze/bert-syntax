@@ -77,6 +77,7 @@ def get_full_token_score(input, target_token, processed_token, overall_token_sco
     return get_full_token_score(input, target_token, processed_token, overall_token_score, sub_token_count)
   
 def get_probs_for_words_mlm(sentence, w1, w2):
+  print(sentence)
   pipeline_input = sentence[0] + mask_token + sentence[1]
   print(pipeline_input)
 
